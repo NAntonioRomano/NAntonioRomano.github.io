@@ -1,29 +1,49 @@
+const menuToggle = document.querySelector('.menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+const navBar = document.querySelector('.nav-bar');
+
+// Toggle menú hamburguesa
+menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+});
+
+// Cierra menú al hacer click en un enlace
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+    });
+});
+
+// Cambia color de navbar al hacer scroll
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        navBar.classList.add('scrolled');
+    } else {
+        navBar.classList.remove('scrolled');
+    }
+});
+
+
 function initCarousel(carouselId) {
     const carousel = document.getElementById(carouselId);
     const track = carousel.querySelector('.carousel-track');
+    const slides = track.children;
     const prevBtn = carousel.querySelector('.prev');
     const nextBtn = carousel.querySelector('.next');
-    const slides = track.children;
-    const totalSlides = slides.length;
     let index = 0;
 
     function updateCarousel() {
-        const slideWidth = slides[0].offsetWidth + 20; // 20px margen
-        let visibleCount = window.innerWidth < 768 ? 1 : Math.min(3, totalSlides);
+        const slideWidth = slides[0].offsetWidth + 20; // 20px margen lateral
         track.style.transform = `translateX(-${index * slideWidth}px)`;
     }
 
     prevBtn.addEventListener('click', () => {
-        const visibleCount = window.innerWidth < 768 ? 1 : Math.min(3, totalSlides);
-        index = (index - 1 + totalSlides) % totalSlides;
-        if(index > totalSlides - visibleCount) index = totalSlides - visibleCount;
+        index = Math.max(index - 1, 0);
         updateCarousel();
     });
 
     nextBtn.addEventListener('click', () => {
-        const visibleCount = window.innerWidth < 768 ? 1 : Math.min(3, totalSlides);
-        index = (index + 1) % totalSlides;
-        if(index > totalSlides - visibleCount) index = totalSlides - visibleCount;
+        index = Math.min(index + 1, slides.length - 1);
         updateCarousel();
     });
 
@@ -35,5 +55,6 @@ function initCarousel(carouselId) {
 initCarousel('carousel-fauna');
 initCarousel('carousel-flora');
 initCarousel('carousel-mapa');
+
 
 

@@ -177,24 +177,21 @@ section h2 {
     border-radius: 12px;
     margin-bottom: 2rem;
     box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-    display: flex;
-    justify-content: center;
 }
 
 .carousel-track {
     display: flex;
+    flex-wrap: nowrap; /* evita que se apilen */
     transition: transform 0.5s ease-in-out;
 }
 
 .carousel img {
-    max-width: 200px;
-    max-height: 200px;
-    width: auto;
-    height: auto;
-    flex-shrink: 0;
+    flex: 0 0 auto; /* fuerza ancho fijo */
+    width: 200px;   /* máximo 200px */
+    height: 200px;  /* máximo 200px */
+    object-fit: cover;
     margin: 0 10px;
     border-radius: 8px;
-    object-fit: cover;
 }
 
 /* Botones */
@@ -220,11 +217,11 @@ section h2 {
 .carousel-btn.prev { left: 10px; }
 .carousel-btn.next { right: 10px; }
 
-/* Responsive: solo 1 imagen visible en móviles */
+/* Responsive: en móvil ocupa todo el ancho del contenedor */
 @media (max-width: 768px) {
     .carousel img {
-        max-width: 100%;
-        max-height: 200px;
+        width: 100%;
+        max-width: 200px;
         margin: 0 auto;
     }
 }
