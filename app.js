@@ -22,3 +22,33 @@ window.addEventListener('scroll', () => {
         navBar.classList.remove('scrolled');
     }
 });
+
+function initCarousel(carouselId) {
+    const carousel = document.getElementById(carouselId);
+    const track = carousel.querySelector('.carousel-track');
+    const prevBtn = carousel.querySelector('.prev');
+    const nextBtn = carousel.querySelector('.next');
+    const slides = track.children;
+    const totalSlides = slides.length;
+    let index = 0;
+
+    function updateCarousel() {
+        track.style.transform = `translateX(-${index * 100}%)`;
+    }
+
+    prevBtn.addEventListener('click', () => {
+        index = (index - 1 + totalSlides) % totalSlides;
+        updateCarousel();
+    });
+
+    nextBtn.addEventListener('click', () => {
+        index = (index + 1) % totalSlides;
+        updateCarousel();
+    });
+}
+
+// Inicializamos los tres carruseles
+initCarousel('carousel-fauna');
+initCarousel('carousel-flora');
+initCarousel('carousel-mapa');
+

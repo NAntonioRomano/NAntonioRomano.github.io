@@ -171,6 +171,56 @@ section h2 {
     box-shadow: 0 6px 16px rgba(0,0,0,0.2);
 }
 
+.carousel {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    display: flex;
+    justify-content: center;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel img {
+    max-width: 200px;  /* Limite de ancho */
+    max-height: 200px; /* Limite de alto */
+    width: auto;
+    height: auto;
+    flex-shrink: 0;
+    margin: 0 10px; /* Separación entre imágenes */
+    border-radius: 8px;
+    object-fit: cover; /* Mantiene proporción y recorta si es necesario */
+}
+
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    font-size: 2rem;
+    padding: 0.2rem 0.6rem;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 2;
+    transition: background-color 0.3s ease;
+}
+
+.carousel-btn:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+.carousel-btn.prev { left: 10px; }
+.carousel-btn.next { right: 10px; }
+
+
 /* Media Query móviles */
 @media (max-width: 768px) {
     .nav-bar {
