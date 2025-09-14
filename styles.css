@@ -226,7 +226,7 @@ section h2::after {
 .carousel-btn.prev { left: 15px; }
 .carousel-btn.next { right: 15px; }
 
-/* Media Query para móviles (Corrección) */
+/* Media Query para móviles */
 @media (max-width: 768px) {
     /* Menú de navegación */
     .nav-bar {
@@ -278,7 +278,7 @@ section h2::after {
         font-size: 2rem;
     }
     
-    /* Carrusel (Corrección) */
+    /* Carrusel */
     .carousel-track {
         flex-direction: row;
         overflow: hidden;
@@ -289,3 +289,4 @@ section h2::after {
         height: 250px; /* Reduce la altura en móvil para que se ajuste mejor */
     }
 }
+
