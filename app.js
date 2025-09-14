@@ -1,10 +1,9 @@
-// ============================
-// MENU HAMBURGUESA
-// ============================
+// SELECCIÓN DE ELEMENTOS DEL DOM
 const menuToggle = document.querySelector('.menu-toggle');
 const navLinks = document.querySelector('.nav-links');
 const navBar = document.querySelector('.nav-bar');
 
+// --- LÓGICA PARA EL MENÚ DE NAVEGACIÓN ---
 menuToggle.addEventListener('click', () => {
     navLinks.classList.toggle('active');
 });
@@ -15,7 +14,6 @@ document.querySelectorAll('.nav-links a').forEach(link => {
     });
 });
 
-// Cambia navbar al hacer scroll
 window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
         navBar.classList.add('scrolled');
@@ -25,52 +23,57 @@ window.addEventListener('scroll', () => {
 });
 
 
-// ============================
-// CARRUSELES RESPONSIVE
-// ============================
+// --- LÓGICA PARA LOS CAROUSELES ---
+/**
+ * Inicializa un carrusel en la página.
+ * @param {string} carouselId El ID del elemento carrusel a inicializar.
+ */
 function initCarousel(carouselId) {
     const carousel = document.getElementById(carouselId);
+    if (!carousel) return;
+
     const track = carousel.querySelector('.carousel-track');
-    const slides = track.children;
+    const slides = Array.from(track.children);
     const prevBtn = carousel.querySelector('.prev');
     const nextBtn = carousel.querySelector('.next');
-    let index = 0;
+    let currentIndex = 0;
 
-    // Aseguramos que las imágenes estén cargadas
-    const waitForImages = Array.from(slides).map(img => {
-        if (img.complete) return Promise.resolve();
-        return new Promise(resolve => { img.onload = resolve; img.onerror = resolve; });
-    });
-
-    Promise.all(waitForImages).then(() => {
+    // Llama a esta función al cargar la página para establecer la posición inicial
+    window.addEventListener('load', () => {
         updateCarousel();
     });
 
+    /**
+     * Actualiza la posición del carrusel para mostrar la imagen actual.
+     */
     function updateCarousel() {
-        const slideWidth = slides[0].offsetWidth + 20; // margen de 10px a cada lado
-        track.style.transform = `translateX(-${index * slideWidth}px)`;
+        const slideWidth = slides[0].offsetWidth;
+        track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
     }
 
+    // Configura el botón "Anterior"
     prevBtn.addEventListener('click', () => {
-        index = Math.max(index - 1, 0);
+        currentIndex = (currentIndex === 0) ? slides.length - 1 : currentIndex - 1;
         updateCarousel();
     });
 
+    // Configura el botón "Siguiente"
     nextBtn.addEventListener('click', () => {
-        index = Math.min(index + 1, slides.length - 1);
+        currentIndex = (currentIndex === slides.length - 1) ? 0 : currentIndex + 1;
         updateCarousel();
     });
 
-    // Ajustar al redimensionar ventana (desktop <-> móvil)
+    // Vuelve a calcular el desplazamiento si el tamaño de la ventana cambia
     window.addEventListener('resize', updateCarousel);
 }
 
-// Inicializamos todos los carruseles al cargar la página
-window.addEventListener('load', () => {
+// Inicializa todos los carruseles que existen en la página
+document.addEventListener('DOMContentLoaded', () => {
     initCarousel('carousel-fauna');
     initCarousel('carousel-flora');
     initCarousel('carousel-mapa');
 });
+
 
 
 
