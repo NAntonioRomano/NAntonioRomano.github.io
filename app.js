@@ -27,27 +27,33 @@ window.addEventListener('scroll', () => {
 function initCarousel(carouselId) {
     const carousel = document.getElementById(carouselId);
     const track = carousel.querySelector('.carousel-track');
-    const slides = track.children;
+    const slides = Array.from(track.children);
     const prevBtn = carousel.querySelector('.prev');
     const nextBtn = carousel.querySelector('.next');
-    let index = 0;
+    let currentIndex = 0;
 
+    // Actualiza la posición del carrusel para mostrar solo una imagen
     function updateCarousel() {
-        const slideWidth = slides[0].offsetWidth + 20; // 20px margen lateral
-        track.style.transform = `translateX(-${index * slideWidth}px)`;
+        const slideWidth = slides[0].offsetWidth;
+        track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
     }
 
+    // Navegación con botón "Anterior"
     prevBtn.addEventListener('click', () => {
-        index = Math.max(index - 1, 0);
+        currentIndex = (currentIndex === 0) ? slides.length - 1 : currentIndex - 1;
         updateCarousel();
     });
 
+    // Navegación con botón "Siguiente"
     nextBtn.addEventListener('click', () => {
-        index = Math.min(index + 1, slides.length - 1);
+        currentIndex = (currentIndex === slides.length - 1) ? 0 : currentIndex + 1;
         updateCarousel();
     });
 
+    // Actualiza el carrusel si la ventana cambia de tamaño
     window.addEventListener('resize', updateCarousel);
+    
+    // Inicializa el carrusel
     updateCarousel();
 }
 

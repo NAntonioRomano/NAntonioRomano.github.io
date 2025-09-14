@@ -7,21 +7,20 @@
 
 body, html {
     height: 100%;
-    font-family: Arial, Helvetica, sans-serif;
-    overflow-x: hidden; /* Evita el scroll horizontal */
+    font-family: 'Poppins', Arial, sans-serif;
+    overflow-x: hidden;
     scroll-behavior: smooth;
     background-color: #f0f5f9;
     color: #333;
 }
 
-/* Header estilo 'hero' */
+/* Hero Section */
 .hero {
     height: 100vh;
-    background-image: url('src/BahiaSamborombonHeader.jpg');
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('src/BahiaSamborombonHeader.jpg');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed; /* Imagen fija al hacer scroll */
+    background-attachment: fixed;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -29,46 +28,36 @@ body, html {
     text-align: center;
     color: white;
     position: relative;
-}
-
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-    z-index: 1;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
 
 .hero-content {
     position: relative;
     z-index: 2;
     max-width: 90%;
-    animation: fadeInUp 1.2s ease;
+    animation: fadeInScale 1.5s ease-out;
 }
 
 .hero h1 {
-    font-size: 3rem;
+    font-size: 3.5rem;
     margin-bottom: 0.5rem;
-    text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+    letter-spacing: 2px;
 }
 
 .hero h2 {
-    font-size: 1.5rem;
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+    font-size: 1.8rem;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
 }
 
-/* Animación para entrada suave */
-@keyframes fadeInUp {
+@keyframes fadeInScale {
     from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: scale(0.9);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: scale(1);
     }
 }
 
@@ -83,9 +72,9 @@ body, html {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(6px);
-    transition: background-color 0.3s ease;
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(8px);
+    transition: background-color 0.4s ease;
 }
 
 .nav-bar.scrolled {
@@ -95,22 +84,24 @@ body, html {
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 2rem;
+    gap: 2.5rem;
 }
 
 .nav-bar a {
     text-decoration: none;
     color: white;
-    font-weight: bold;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    transition: all 0.3s ease;
+    font-weight: 500;
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
 }
 
 .nav-bar a:hover {
-    background-color: white;
     color: #0077cc;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    background-color: white;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
 }
 
 /* Menú hamburguesa */
@@ -119,122 +110,129 @@ body, html {
     flex-direction: column;
     cursor: pointer;
     z-index: 1001;
+    transition: transform 0.3s ease-in-out;
 }
 
 .menu-toggle .bar {
-    width: 25px;
+    width: 28px;
     height: 3px;
     background-color: white;
-    margin: 4px 0;
-    transition: all 0.3s ease;
+    margin: 5px 0;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 /* Estilo general de secciones */
 section {
-    padding: 4rem 2rem;
+    padding: 5rem 2rem;
     max-width: 1200px;
-    margin: auto;
+    margin: 3rem auto;
     line-height: 1.8;
-    border-radius: 12px;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-    margin-bottom: 3rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    transition: transform 0.5s ease-in-out;
     animation: fadeInUp 1.2s ease;
+}
+
+section:hover {
+    transform: translateY(-8px);
 }
 
 section h2 {
     text-align: center;
-    margin-bottom: 2rem;
-    font-size: 2rem;
+    margin-bottom: 2.5rem;
+    font-size: 2.5rem;
     color: #004466;
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+section h2::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: #0077cc;
+    margin: 10px auto 0;
+    border-radius: 2px;
 }
 
 /* Colores diferenciados */
-#desc { background-color: #e0f7fa; }
+#desc { background-color: #e3f2fd; }
 #fauna { background-color: #f1f8e9; }
-#flora { background-color: #fffde7; }
-#mapa { background-color: #ede7f6; }
+#flora { background-color: #fff8e1; }
+#mapa { background-color: #e8eaf6; }
 
 /* Botones */
 .btn {
     display: inline-block;
-    padding: 0.6rem 1.2rem;
+    padding: 0.8rem 1.6rem;
     background: #0077cc;
     color: white;
-    border-radius: 8px;
+    border-radius: 10px;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease-in-out;
+    font-weight: bold;
 }
 
 .btn:hover {
     background: #005fa3;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
 }
 
+/* Carrusel - NUEVOS ESTILOS */
 .carousel {
     position: relative;
     overflow: hidden;
-    border-radius: 12px;
-    margin-bottom: 2rem;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    border-radius: 16px;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
 }
 
 .carousel-track {
     display: flex;
-    flex-wrap: nowrap; /* evita que se apilen */
-    transition: transform 0.5s ease-in-out;
+    flex-wrap: nowrap;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .carousel img {
-    flex: 0 0 auto; /* fuerza ancho fijo */
-    width: 200px;   /* máximo 200px */
-    height: 200px;  /* máximo 200px */
+    min-width: 100%; /* Las imágenes ahora ocupan el 100% del contenedor */
+    height: 400px; /* Tamaño fijo para que todas las imágenes sean iguales */
     object-fit: cover;
-    margin: 0 10px;
-    border-radius: 8px;
+    border-radius: 0;
+    box-shadow: none;
+    transition: transform 0.5s ease-in-out;
 }
 
-/* Botones */
 .carousel-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0.6);
     color: white;
     border: none;
-    font-size: 2rem;
-    padding: 0.2rem 0.6rem;
+    font-size: 2.5rem;
+    padding: 0.5rem 1rem;
     cursor: pointer;
     border-radius: 50%;
     z-index: 2;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .carousel-btn:hover {
-    background-color: rgba(0,0,0,0.8);
+    background-color: rgba(0,0,0,0.9);
+    transform: translateY(-50%) scale(1.1);
 }
 
-.carousel-btn.prev { left: 10px; }
-.carousel-btn.next { right: 10px; }
+.carousel-btn.prev { left: 15px; }
+.carousel-btn.next { right: 15px; }
 
-/* Responsive: en móvil ocupa todo el ancho del contenedor */
-@media (max-width: 768px) {
-    .carousel img {
-        width: 100%;
-        max-width: 200px;
-        margin: 0 auto;
-    }
-}
-
-
-
-/* Media Query móviles */
+/* Responsive para dispositivos móviles */
 @media (max-width: 768px) {
     .nav-bar {
         justify-content: space-between;
-        padding: 1rem;
+        padding: 1rem 1.5rem;
     }
-
+    
     .nav-links {
         display: none;
         flex-direction: column;
@@ -257,18 +255,29 @@ section h2 {
         text-align: center;
         padding: 1rem 0;
     }
-
+    
     .menu-toggle {
         display: flex;
     }
 
     .hero h1 {
-        font-size: 2rem;
+        font-size: 2.5rem;
     }
 
     .hero h2 {
-        font-size: 1rem;
+        font-size: 1.2rem;
+    }
+    
+    .carousel img {
+        height: 250px;
+    }
+
+    section {
+        padding: 3rem 1.5rem;
+    }
+
+    section h2 {
+        font-size: 2rem;
     }
 }
-
 
