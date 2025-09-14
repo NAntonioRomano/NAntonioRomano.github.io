@@ -1,20 +1,21 @@
+// ============================
+// MENU HAMBURGUESA
+// ============================
 const menuToggle = document.querySelector('.menu-toggle');
 const navLinks = document.querySelector('.nav-links');
 const navBar = document.querySelector('.nav-bar');
 
-// Toggle menú hamburguesa
 menuToggle.addEventListener('click', () => {
     navLinks.classList.toggle('active');
 });
 
-// Cierra menú al hacer click en un enlace
 document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', () => {
         navLinks.classList.remove('active');
     });
 });
 
-// Cambia color de navbar al hacer scroll
+// Cambia navbar al hacer scroll
 window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
         navBar.classList.add('scrolled');
@@ -24,45 +25,54 @@ window.addEventListener('scroll', () => {
 });
 
 
+// ============================
+// CARRUSELES RESPONSIVE
+// ============================
 function initCarousel(carouselId) {
     const carousel = document.getElementById(carouselId);
     const track = carousel.querySelector('.carousel-track');
-    const slides = Array.from(track.children);
+    const slides = track.children;
     const prevBtn = carousel.querySelector('.prev');
     const nextBtn = carousel.querySelector('.next');
-    let currentIndex = 0;
+    let index = 0;
 
-    // Actualiza la posición del carrusel para mostrar solo una imagen
+    // Aseguramos que las imágenes estén cargadas
+    const waitForImages = Array.from(slides).map(img => {
+        if (img.complete) return Promise.resolve();
+        return new Promise(resolve => { img.onload = resolve; img.onerror = resolve; });
+    });
+
+    Promise.all(waitForImages).then(() => {
+        updateCarousel();
+    });
+
     function updateCarousel() {
-        const slideWidth = slides[0].offsetWidth;
-        track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+        const slideWidth = slides[0].offsetWidth + 20; // margen de 10px a cada lado
+        track.style.transform = `translateX(-${index * slideWidth}px)`;
     }
 
-    // Navegación con botón "Anterior"
     prevBtn.addEventListener('click', () => {
-        currentIndex = (currentIndex === 0) ? slides.length - 1 : currentIndex - 1;
+        index = Math.max(index - 1, 0);
         updateCarousel();
     });
 
-    // Navegación con botón "Siguiente"
     nextBtn.addEventListener('click', () => {
-        currentIndex = (currentIndex === slides.length - 1) ? 0 : currentIndex + 1;
+        index = Math.min(index + 1, slides.length - 1);
         updateCarousel();
     });
 
-    // Actualiza el carrusel si la ventana cambia de tamaño
+    // Ajustar al redimensionar ventana (desktop <-> móvil)
     window.addEventListener('resize', updateCarousel);
-    
-    // Inicializa el carrusel
-    updateCarousel();
 }
 
-// Inicializamos los carruseles
+// Inicializamos todos los carruseles al cargar la página
 window.addEventListener('load', () => {
     initCarousel('carousel-fauna');
     initCarousel('carousel-flora');
     initCarousel('carousel-mapa');
 });
+
+
 
 
 
