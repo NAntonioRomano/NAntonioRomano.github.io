@@ -58,9 +58,12 @@ function initCarousel(carouselId) {
 }
 
 // Inicializamos los carruseles
-initCarousel('carousel-fauna');
-initCarousel('carousel-flora');
-initCarousel('carousel-mapa');
+window.addEventListener('load', () => {
+    initCarousel('carousel-fauna');
+    initCarousel('carousel-flora');
+    initCarousel('carousel-mapa');
+});
+
 
 
 
