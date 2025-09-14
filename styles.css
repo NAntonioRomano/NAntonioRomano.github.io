@@ -286,7 +286,7 @@ section h2::after {
     
     .carousel img {
         width: 100%;
-        height: 250px; /* Reduce la altura en móvil para que se ajuste mejor */
+        height: 250px;
     }
 }
 
