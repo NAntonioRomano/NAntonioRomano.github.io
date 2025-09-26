@@ -46,6 +46,11 @@
         .nav-link.active span {
             color: #0e7490;
         }
+        
+        /* --- NUEVOS ESTILOS PARA LA GALERÍA EMERGENTE (LIGHTBOX) --- */
+        #lightbox.active {
+            display: flex;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -171,14 +176,14 @@
             <p class="text-center text-gray-600 max-w-3xl mx-auto mb-6">
                 Así trabajamos para aprender sobre este increíble lugar. ¡Fue muy divertido preparar todo para la exposición!
             </p>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                <img src="src/Foto1.jpg" alt="Foto del equipo trabajando 1" class="rounded-lg shadow-md aspect-square object-cover">
-                <img src="src/Foto2.jpg" alt="Foto del equipo trabajando 2" class="rounded-lg shadow-md aspect-square object-cover">
-                <img src="src/Foto3.jpg" alt="Foto del equipo trabajando 3" class="rounded-lg shadow-md aspect-square object-cover">
-                <img src="src/Foto4.jpg" alt="Foto del equipo trabajando 4" class="rounded-lg shadow-md aspect-square object-cover">
-                <img src="src/Foto5.jpg" alt="Foto del equipo trabajando 5" class="rounded-lg shadow-md aspect-square object-cover">
-                <img src="src/Foto6.jpg" alt="Foto del equipo trabajando 6" class="rounded-lg shadow-md aspect-square object-cover">
-                <img src="src/Foto7.jpg" alt="Foto del equipo trabajando 7" class="rounded-lg shadow-md aspect-square object-cover">
+            <div id="team-gallery" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                <img src="src/Foto1.jpg" alt="Foto del equipo trabajando 1" class="gallery-item rounded-lg shadow-md aspect-square object-cover object-top cursor-pointer hover:opacity-80 transition-opacity">
+                <img src="src/Foto2.jpg" alt="Foto del equipo trabajando 2" class="gallery-item rounded-lg shadow-md aspect-square object-cover object-top cursor-pointer hover:opacity-80 transition-opacity">
+                <img src="src/Foto3.jpg" alt="Foto del equipo trabajando 3" class="gallery-item rounded-lg shadow-md aspect-square object-cover object-top cursor-pointer hover:opacity-80 transition-opacity">
+                <img src="src/Foto4.jpg" alt="Foto del equipo trabajando 4" class="gallery-item rounded-lg shadow-md aspect-square object-cover object-top cursor-pointer hover:opacity-80 transition-opacity">
+                <img src="src/Foto5.jpg" alt="Foto del equipo trabajando 5" class="gallery-item rounded-lg shadow-md aspect-square object-cover object-top cursor-pointer hover:opacity-80 transition-opacity">
+                <img src="src/Foto6.jpg" alt="Foto del equipo trabajando 6" class="gallery-item rounded-lg shadow-md aspect-square object-cover object-top cursor-pointer hover:opacity-80 transition-opacity">
+                <img src="src/Foto7.jpg" alt="Foto del equipo trabajando 7" class="gallery-item rounded-lg shadow-md aspect-square object-cover object-top cursor-pointer hover:opacity-80 transition-opacity">
             </div>
         </section>
     
@@ -191,7 +196,7 @@
     </footer>
 
     <!-- ========== NUEVO MENÚ DE NAVEGACIÓN FIJO ========== -->
-    <nav class="fixed bottom-0 left-0 right-0 bg-white shadow-t-lg border-t border-gray-200">
+    <nav class="fixed bottom-0 left-0 right-0 bg-white shadow-t-lg border-t border-gray-200 z-50">
         <div class="flex justify-around max-w-xl mx-auto">
             <a href="#desc" class="nav-link flex-1 text-center py-2 px-1 text-gray-500 hover:text-cyan-600 transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" /></svg>
@@ -210,11 +215,20 @@
                 <span class="text-xs">Mapa</span>
             </a>
             <a href="#equipo" class="nav-link flex-1 text-center py-2 px-1 text-gray-500 hover:text-cyan-600 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283-.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
                 <span class="text-xs">Equipo</span>
             </a>
         </div>
     </nav>
+    
+    <!-- ========== NUEVA GALERÍA EMERGENTE (LIGHTBOX) ========== -->
+    <div id="lightbox" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-80 justify-center items-center z-50 hidden">
+        <img id="lightbox-img" src="" alt="Foto del equipo en grande" class="max-w-[90%] max-h-[80%] object-contain">
+        <button id="lightbox-close" class="absolute top-4 right-4 text-white text-3xl">&times;</button>
+        <button id="lightbox-prev" class="absolute left-4 top-1/2 -translate-y-1/2 text-white text-4xl bg-black bg-opacity-50 rounded-full p-2">&#10094;</button>
+        <button id="lightbox-next" class="absolute right-4 top-1/2 -translate-y-1/2 text-white text-4xl bg-black bg-opacity-50 rounded-full p-2">&#10095;</button>
+    </div>
+
 
     <script>
         // --- SCRIPT PARA ANIMAR SECCIONES AL HACER SCROLL ---
@@ -261,6 +275,66 @@
         sections.forEach(section => {
             sectionObserver.observe(section);
         });
+
+        // --- NUEVO SCRIPT PARA LA GALERÍA EMERGENTE (LIGHTBOX) ---
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxClose = document.getElementById('lightbox-close');
+        const lightboxPrev = document.getElementById('lightbox-prev');
+        const lightboxNext = document.getElementById('lightbox-next');
+
+        let currentIndex = 0;
+        const images = Array.from(galleryItems).map(item => item.src);
+
+        function showImage(index) {
+            lightboxImg.src = images[index];
+            currentIndex = index;
+            lightbox.classList.remove('hidden');
+            lightbox.classList.add('flex'); // Usamos flex para centrar
+        }
+
+        galleryItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                showImage(index);
+            });
+        });
+
+        lightboxClose.addEventListener('click', () => {
+            lightbox.classList.add('hidden');
+            lightbox.classList.remove('flex');
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                 lightbox.classList.add('hidden');
+                 lightbox.classList.remove('flex');
+            }
+        });
+
+        lightboxNext.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % images.length;
+            showImage(currentIndex);
+        });
+
+        lightboxPrev.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            showImage(currentIndex);
+        });
+        
+        // Navegación con teclado
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('hidden')) {
+                if (e.key === 'ArrowRight') {
+                    lightboxNext.click();
+                } else if (e.key === 'ArrowLeft') {
+                    lightboxPrev.click();
+                } else if (e.key === 'Escape') {
+                    lightboxClose.click();
+                }
+            }
+        });
+
     </script>
 </body>
 </html>
