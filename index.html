@@ -1,123 +1,189 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bahia de Samborombón</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Bahía de Samborombón - Proyecto Escolar</title>
+    
+    <!-- Tailwind CSS para un diseño moderno y adaptable -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts para una tipografía más amigable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Usamos la fuente Poppins que es muy legible y amigable */
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Efecto de degradado suave sobre la imagen principal */
+        .hero-gradient {
+            background-image: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1));
+        }
+
+        /* Clase para animar la aparición de las secciones al hacer scroll */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
-<body>
-    <header class="hero">
-        <nav class="nav-bar">
-            <div class="menu-toggle">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-            </div>
-            <ul class="nav-links">
-                <li><a href="#desc">Descripcion</a></li>
-                <li><a href="#fauna">Fauna</a></li>
-                <li><a href="#flora">Flora</a></li>
-                <li><a href="#mapa">Mapa</a></li>
-            </ul>
-        </nav>
-        <div class="hero-content">
-            <h1>Bahia de Samborombón</h1>
-            <h2>Refugio de vida silvestre</h2>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- ========== ENCABEZADO Y TÍTULO PRINCIPAL ========== -->
+    <!-- Se utiliza la imagen del venado joven para el encabezado -->
+    <header class="relative h-screen bg-cover bg-center" style="background-image: url('src/BahiaSamborombonHeader.jpg');">
+        <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+        <div class="relative h-full flex flex-col justify-center items-center text-white text-center p-4 hero-gradient">
+            <h1 class="text-4xl md:text-6xl font-bold tracking-tight leading-tight mb-4" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.7);">
+                Bahía de Samborombón
+            </h1>
+            <p class="text-lg md:text-2xl font-light" style="text-shadow: 1px 1px 4px rgba(0,0,0,0.7);">
+                Un tesoro natural de Argentina
+            </p>
         </div>
     </header>
 
-    <section id="desc" class="descripcion" style="padding: 4rem 2rem; max-width: 1200px; margin: auto; line-height: 1.8;">
-    <h2 style="text-align: center; margin-bottom: 2rem;">Descripción del área</h2>
-    <p>
-        La Reserva Bahía de Samborombón consta de un área terrestre, la <strong>Reserva Natural Integral (RNI)</strong>, 
-        y un área marina, la <strong>Reserva Natural de Objetivo Definido (RNOD)</strong>. 
-        Esta reserva forma parte del conjunto de las áreas naturales protegidas de la Bahía de Samborombón, 
-        que se ubican a lo largo de toda la bahía, desde Punta Piedras hasta el Cabo San Antonio. 
-        La bahía es una zona intermareal extensa, constituida principalmente por bañados, pantanos salobres 
-        y cangrejales, todos ellos de gran importancia como hábitats y refugios para la biodiversidad, 
-        en particular para un amplio número de especies de aves migratorias. 
-        Aparte de estos ambientes, encontramos pastizales y estepas salobres que conforman la tan característica 
-        <em>Pampa Deprimida</em>.
-    </p>
-    <p>
-        La RNI se considera como una “zona intangible” ya que tiene por objetivo principal la protección estricta 
-        de los valores de conservación de esta área protegida, los cuales son susceptibles a los efectos negativos 
-        que pueden ocasionar las actividades antrópicas. Además, esta zona alberga parte de la población del 
-        <strong>Venado de las Pampas</strong>, especie en peligro de extinción.
-    </p>
-    <p>
-        La RNOD rodea el Este de la RNI para brindarle mayor protección. 
-        Sus aguas son de gran relevancia para especies que allí habitan, tales como el 
-        <strong>delfín franciscana</strong> y el <strong>delfín nariz de botella</strong>, 
-        como para especies que las utilizan como sitios de alimentación, como las tortugas marinas. 
-        Asimismo, es un importante lugar para la reproducción de la fauna ictícola, y sus costas típicas 
-        con cangrejales sirven de áreas de alimentación y descanso tanto a aves migratorias como residentes.
-    </p>
-    </section>
+    <!-- ========== CONTENIDO PRINCIPAL DE LA PÁGINA ========== -->
+    <main class="container mx-auto p-4 md:p-8">
 
-<!-- SECCIÓN FAUNA -->
-<section id="fauna" class="fauna">
-    <h2>Fauna</h2>
-    <div class="carousel" id="carousel-fauna">
-        <div class="carousel-track">
-            <img src="/src/delfines-de-la-plata.jpg" alt="Fauna 1">
-            <img src="/src/Gaviota.jpeg" alt="Fauna 2">
-            <img src="/src/VenadoDeLasPampas.jpg" alt="Fauna 3">
-        </div>
-        <button class="carousel-btn prev">&#10094;</button>
-        <button class="carousel-btn next">&#10095;</button>
-    </div>
-    <ul>
-        <li>Venado de las Pampas</li>
-        <li>Gaviota de Olrog</li>
-        <li>Delfín franciscana y nariz de botella</li>
-    </ul>
-</section>
+        <!-- ===== SECCIÓN 1: ¿QUÉ ES LA BAHÍA? ===== -->
+        <section id="desc" class="scroll-reveal my-12 md:my-16">
+            <h2 class="text-3xl font-bold text-center mb-4 text-cyan-800">¿Qué es la Bahía de Samborombón?</h2>
+            <p class="text-lg text-center text-gray-600 max-w-3xl mx-auto mb-8">
+                Imagina una costa gigante donde el río y el mar se encuentran. Es un lugar lleno de pantanos, pastizales y cangrejales, súper importante para miles de animales, ¡especialmente para las aves que viajan por el mundo!
+            </p>
+            <!-- Tarjetas con datos curiosos -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                <div class="bg-white p-4 rounded-xl shadow-lg">
+                    <div class="text-cyan-600 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    </div>
+                    <h3 class="font-bold text-lg">Ubicación</h3>
+                    <p class="text-sm text-gray-500">Costa de Buenos Aires</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-lg">
+                    <div class="text-cyan-600 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    </div>
+                    <h3 class="font-bold text-lg">Superficie</h3>
+                    <p class="text-sm text-gray-500">404.000 hectáreas</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-lg">
+                    <div class="text-cyan-600 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                    <h3 class="font-bold text-lg">Ecosistema</h3>
+                    <p class="text-sm text-gray-500">Humedal costero</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-lg">
+                    <div class="text-cyan-600 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <h3 class="font-bold text-lg">Hogar de</h3>
+                    <p class="text-sm text-gray-500">+300 especies</p>
+                </div>
+            </div>
+        </section>
 
-<!-- SECCIÓN FLORA -->
-<section id="flora" class="flora">
-    <h2>Flora</h2>
-    <div class="carousel" id="carousel-flora">
-        <div class="carousel-track">
-            <img src="/src/Cortadera.jpg" alt="Flora 1">
-            <img src="/src/Juncales.jpg" alt="Flora 2">
-            <img src="/src/Pastizal.jpg" alt="Flora 3">
-        </div>
-        <button class="carousel-btn prev">&#10094;</button>
-        <button class="carousel-btn next">&#10095;</button>
-    </div>
-    <ul>
-        <li>Pastizales y estepas salobres</li>
-        <li>Juncales y totorales</li>
-        <li>Cordones de conchilla con Celtis tala y Cortaderia</li>
-    </ul>
-</section>
+        <!-- ===== SECCIÓN 2: FAUNA ===== -->
+        <section id="fauna" class="scroll-reveal my-12 md:my-16">
+            <h2 class="text-3xl font-bold text-center mb-8 text-green-800">Animales increíbles</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Tarjeta de Animal 1 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <img src="src/VenadoDeLasPampas.jpg" alt="Venado de las Pampas" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2">Venado de las Pampas</h3>
+                        <p class="text-gray-600 text-sm">Es uno de los últimos lugares donde vive este ciervo. ¡Está en peligro de extinción y aquí lo cuidan!</p>
+                    </div>
+                </div>
+                <!-- Tarjeta de Animal 2 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <img src="src/Gaviota.jpeg" alt="Gaviota de Olrog" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2">Gaviota de Olrog</h3>
+                        <p class="text-gray-600 text-sm">Miles de aves migratorias como esta gaviota, que también está en peligro, usan la bahía para descansar.</p>
+                    </div>
+                </div>
+                <!-- Tarjeta de Animal 3 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <img src="src/delfines-de-la-plata.jpg" alt="Delfín Franciscana" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2">Delfín Franciscana</h3>
+                        <p class="text-gray-600 text-sm">Es uno de los delfines más pequeños y raros del mundo. Le encantan las aguas tranquilas de la bahía.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<!-- SECCIÓN MAPA -->
-<section id="mapa" class="mapa">
-    <h2>Mapa</h2>
-    <p>
-        La Bahía de Samborombón se encuentra en el litoral de la provincia de Buenos Aires, extendiéndose desde
-        Punta Piedras hasta el Cabo San Antonio. Sus costas conforman una amplia zona intermareal, con humedales,
-        bañados y cangrejales de enorme valor ecológico.
-    </p>
-    <div class="carousel" id="carousel-mapa">
-        <div class="carousel-track">
-            <img src="/src/Mapa1.jpg" alt="Mapa 1">
-            <img src="/src/Mapa2.JPG" alt="Mapa 2">
-            <img src="/src/Mapa3.jpg" alt="Mapa 3">
-        </div>
-        <button class="carousel-btn prev">&#10094;</button>
-        <button class="carousel-btn next">&#10095;</button>
-    </div>
-    <p style="text-align:center; margin-top:1rem;">
-        <a href="https://ampargentina.org/areas/bahia-samborombon/" target="_blank" class="btn">Ver mapa en AMP Argentina</a>
-    </p>
-</section>
+        <!-- ===== SECCIÓN 3: FLORA ===== -->
+        <section id="flora" class="scroll-reveal my-12 md:my-16">
+            <h2 class="text-3xl font-bold text-center mb-8 text-yellow-800">Plantas que la hacen especial</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col sm:flex-row items-center">
+                    <img src="src/Pastizal.jpg" alt="Pastizales" class="w-full sm:w-1/3 h-48 sm:h-full object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2">Pastizales y Espartillares</h3>
+                        <p class="text-gray-600 text-sm">Son como "praderas" de pasto que se adaptan al agua salada. Son el hogar y la comida de muchos animales.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col sm:flex-row items-center">
+                    <img src="src/Juncales.jpg" alt="Juncales" class="w-full sm:w-1/3 h-48 sm:h-full object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2">Juncales</h3>
+                        <p class="text-gray-600 text-sm">Estos juncos altos crecen en las zonas más inundadas y ayudan a limpiar el agua, ¡como un filtro natural!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <!-- ===== SECCIÓN 4: MAPA ===== -->
+        <section id="mapa" class="scroll-reveal my-12 md:my-16">
+            <h2 class="text-3xl font-bold text-center mb-8 text-blue-800">¿Dónde está este paraíso?</h2>
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-6">
+                La bahía forma una gran curva en la costa de la provincia de Buenos Aires. Es tan grande que se puede ver desde el espacio.
+            </p>
+            <div class="rounded-xl shadow-lg overflow-hidden">
+                <img src="src/Mapa1.jpg" alt="Mapa de la Bahía de Samborombón" class="w-full h-auto object-contain">
+            </div>
+        </section>
+    
+    </main>
 
-    <script src="app.js"></script>
+    <!-- ========== PIE DE PÁGINA ========== -->
+    <footer class="bg-gray-800 text-white text-center p-6 mt-12">
+        <p>Proyecto escolar sobre la Bahía de Samborombón.</p>
+        <p class="text-sm text-gray-400 mt-2">Información adaptada de AMP Argentina y organismos de conservación.</p>
+    </footer>
+
+    <script>
+        // Este script hace que las secciones aparezcan con una animación suave
+        // cuando el usuario llega a ellas al hacer scroll.
+        
+        const revealElements = document.querySelectorAll('.scroll-reveal');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1 // La animación se activa cuando el 10% del elemento es visible
+        });
+
+        revealElements.forEach(el => {
+            revealObserver.observe(el);
+        });
+    </script>
 </body>
-
 </html>
