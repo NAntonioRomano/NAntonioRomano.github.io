@@ -152,8 +152,42 @@ async function renderClientes() {
     }
 }
 
-function editarCliente(id) {
-    // Implementación de la función editarCliente (usa getAllClientes para buscar el cliente)
+/**
+ * Prepara el formulario para editar un cliente. (MODIFICACIÓN)
+ * Obtiene el cliente de la DB y rellena el formulario.
+ * @param {string} id - ID del cliente a editar.
+ */
+async function editarCliente(id) {
+    try {
+        // Obtenemos todos los clientes de la base de datos
+        const clientes = await getAllClientes(); 
+        // Buscamos el cliente específico por su ID
+        const cliente = clientes.find(c => c.id === id); 
+        
+        if (cliente) {
+            // CRÍTICO: Rellenar el campo oculto con el ID existente
+            document.getElementById('cliente-id').value = cliente.id; 
+            
+            // Rellenar los campos visibles
+            document.getElementById('nombre').value = cliente.nombre;
+            document.getElementById('direccion').value = cliente.direccion;
+            document.getElementById('celular').value = cliente.celular;
+            document.getElementById('saldo').value = cliente.saldo;
+            
+            // Cambiar el texto del botón para feedback visual
+            saveBtn.textContent = 'Actualizar Cliente';
+            
+            // Desplazar la vista (opcional, pero útil)
+            document.getElementById('cliente-form-section').scrollIntoView({ behavior: 'smooth' });
+            
+            console.log(`Cliente con ID ${id} cargado para edición.`);
+        } else {
+            alert('Error: Cliente no encontrado para edición.');
+        }
+    } catch (error) {
+        console.error('Error al intentar cargar datos para edición:', error);
+        alert('Hubo un error al buscar el cliente en la base de datos.');
+    }
 }
 
 async function bajaCliente(id) {
@@ -224,3 +258,4 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('La aplicación no pudo iniciar correctamente. Revisar la configuración de IndexedDB.', error);
     }
 });
+
