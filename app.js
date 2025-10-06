@@ -1,8 +1,8 @@
-// --- script.js (Versión Corregida y Robustecida con IndexedDB) ---
+// --- script.js (Versión Final y Funcional) ---
 
 // Nombre y versión de nuestra base de datos
 const DB_NAME = 'PanaderiaDB';
-const DB_VERSION = 1; // Recuerda: aumenta este número (ej: 2) si necesitas forzar la recreación de la estructura de la DB.
+const DB_VERSION = 1; // IMPORTANTE: Aumenta este número si cambias la estructura de los Object Stores.
 const STORE_CLIENTES = 'clientes';
 const STORE_PLANTILLAS = 'plantillas';
 
@@ -44,7 +44,8 @@ function openDB() {
             }
 
             if (!db.objectStoreNames.contains(STORE_PLANTILLAS)) {
-                db.createObjectStore(STORE_PLANTILLAS, { keyPath: 'clienteId' });
+                // KeyPath es 'clienteId' porque lo usaremos para almacenar el pedido recurrente del cliente
+                db.createObjectStore(STORE_PLANTILLAS, { keyPath: 'clienteId' }); 
             }
         };
     });
@@ -56,7 +57,6 @@ function putCliente(cliente) {
     return new Promise((resolve, reject) => {
         const transaction = db.transaction([STORE_CLIENTES], 'readwrite');
         const store = transaction.objectStore(STORE_CLIENTES);
-        
         const request = store.put(cliente);
 
         request.onsuccess = () => resolve(true);
@@ -68,7 +68,6 @@ function getAllClientes() {
     return new Promise((resolve, reject) => {
         const transaction = db.transaction([STORE_CLIENTES], 'readonly');
         const store = transaction.objectStore(STORE_CLIENTES);
-        
         const request = store.getAll();
 
         request.onsuccess = () => resolve(request.result);
@@ -82,9 +81,8 @@ function deleteCliente(id) {
         const clienteStore = transaction.objectStore(STORE_CLIENTES);
         const plantillaStore = transaction.objectStore(STORE_PLANTILLAS);
         
-        // Eliminamos el cliente y su plantilla asociada
         clienteStore.delete(id);
-        plantillaStore.delete(id);
+        plantillaStore.delete(id); // Elimina la plantilla asociada
         
         transaction.oncomplete = () => resolve(true);
         transaction.onerror = (event) => reject(event.target.error);
@@ -97,7 +95,6 @@ function putPlantilla(plantilla) {
     return new Promise((resolve, reject) => {
         const transaction = db.transaction([STORE_PLANTILLAS], 'readwrite');
         const store = transaction.objectStore(STORE_PLANTILLAS);
-        
         const request = store.put(plantilla);
 
         request.onsuccess = () => resolve(true);
@@ -109,7 +106,6 @@ function getAllPlantillas() {
     return new Promise((resolve, reject) => {
         const transaction = db.transaction([STORE_PLANTILLAS], 'readonly');
         const store = transaction.objectStore(STORE_PLANTILLAS);
-        
         const request = store.getAll();
 
         request.onsuccess = () => resolve(request.result);
@@ -118,7 +114,7 @@ function getAllPlantillas() {
 }
 
 
-// --- 4. Lógica de UI (renderClientes, bajaCliente, etc.) ---
+// --- 4. Lógica de UI (renderClientes, bajaCliente, editarCliente, etc.) ---
 
 async function renderClientes() {
     try {
@@ -133,7 +129,7 @@ async function renderClientes() {
         clientes.forEach(cliente => {
             const li = document.createElement('li');
             
-            // Reemplaza esta línea con tu código HTML para mostrar el cliente y los botones:
+            // HTML para mostrar el cliente y los botones
             li.innerHTML = `
                 <strong>${cliente.nombre}</strong> (${cliente.celular}) <br>
                 Dir: ${cliente.direccion} - Saldo: $${cliente.saldo.toFixed(2)}
@@ -153,40 +149,32 @@ async function renderClientes() {
 }
 
 /**
- * Prepara el formulario para editar un cliente. (MODIFICACIÓN)
- * Obtiene el cliente de la DB y rellena el formulario.
+ * Prepara el formulario para editar un cliente. (FUNCIÓN ARREGLADA)
  * @param {string} id - ID del cliente a editar.
  */
 async function editarCliente(id) {
     try {
-        // Obtenemos todos los clientes de la base de datos
-        const clientes = await getAllClientes(); 
-        // Buscamos el cliente específico por su ID
-        const cliente = clientes.find(c => c.id === id); 
+        const clientes = await getAllClientes();
+        const cliente = clientes.find(c => c.id === id);
         
         if (cliente) {
-            // CRÍTICO: Rellenar el campo oculto con el ID existente
+            // CRÍTICO: Rellenar el campo oculto y los campos visibles
             document.getElementById('cliente-id').value = cliente.id; 
-            
-            // Rellenar los campos visibles
             document.getElementById('nombre').value = cliente.nombre;
             document.getElementById('direccion').value = cliente.direccion;
             document.getElementById('celular').value = cliente.celular;
             document.getElementById('saldo').value = cliente.saldo;
             
-            // Cambiar el texto del botón para feedback visual
+            // Actualizar el botón (usa la variable global 'saveBtn')
             saveBtn.textContent = 'Actualizar Cliente';
             
-            // Desplazar la vista (opcional, pero útil)
             document.getElementById('cliente-form-section').scrollIntoView({ behavior: 'smooth' });
-            
             console.log(`Cliente con ID ${id} cargado para edición.`);
         } else {
             alert('Error: Cliente no encontrado para edición.');
         }
     } catch (error) {
         console.error('Error al intentar cargar datos para edición:', error);
-        alert('Hubo un error al buscar el cliente en la base de datos.');
     }
 }
 
@@ -203,25 +191,95 @@ async function bajaCliente(id) {
     }
 }
 
+/**
+ * Muestra un prompt para configurar el pedido estándar (plantilla) de un cliente. (FUNCIÓN IMPLEMENTADA)
+ */
 async function mostrarPlantilla(clienteId, nombre) {
-    // Implementación de la función mostrarPlantilla (usa getAllPlantillas y putPlantilla)
+    // 1. Obtener todas las plantillas
+    const plantillasArr = await getAllPlantillas();
+    // 2. Buscar la plantilla específica del cliente
+    const plantillaExistente = plantillasArr.find(p => p.clienteId === clienteId);
+    const pedidoActual = plantillaExistente ? plantillaExistente.cantidad : 0;
+    
+    const nuevoPedido = prompt(`Establecer plantilla de pedido para ${nombre}.
+    Pedido actual: ${pedidoActual} unidades.
+    Ingresa la cantidad estándar de pan francés:`, pedidoActual);
+
+    if (nuevoPedido !== null) {
+        const cantidad = parseInt(nuevoPedido);
+        if (!isNaN(cantidad) && cantidad >= 0) {
+            const nuevaPlantilla = { clienteId, cantidad };
+            await putPlantilla(nuevaPlantilla); // Guardar/Actualizar plantilla
+            alert(`Plantilla de ${nombre} guardada: ${cantidad} unidades.`);
+        } else {
+            alert('Por favor, ingresa un número válido.');
+        }
+    }
 }
 
+/**
+ * Genera la lista de reparto usando las plantillas guardadas. (FUNCIÓN IMPLEMENTADA)
+ */
 async function generarRepartoDesdePlantillas() {
-    // Implementación de la función generarRepartoDesdePlantillas (usa getAllClientes y getAllPlantillas)
+    try {
+        const clientes = await getAllClientes();
+        const plantillasArr = await getAllPlantillas();
+        repartoList.innerHTML = ''; // Limpiar la lista de reparto
+        
+        if (clientes.length === 0) {
+            repartoList.innerHTML = '<li>No puedes generar un reparto sin clientes.</li>';
+            return;
+        }
+
+        // Convertimos el array de plantillas a un objeto para fácil acceso (key=clienteId, value=cantidad)
+        const plantillas = plantillasArr.reduce((acc, p) => {
+            acc[p.clienteId] = p.cantidad;
+            return acc;
+        }, {});
+        
+        let totalPan = 0;
+        
+        clientes.forEach(cliente => {
+            const cantidad = plantillas[cliente.id] || 0; 
+            totalPan += cantidad;
+            
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <strong>${cliente.nombre}</strong> - ${cliente.direccion}
+                <br>
+                <input type="number" value="${cantidad}" onchange="actualizarPedidoReparto(this.value, '${cliente.id}')" style="width: 80px;"> unidades de pan.
+            `;
+            repartoList.appendChild(li);
+        });
+        
+        // Mostrar el total
+        const totalLi = document.createElement('li');
+        totalLi.style.fontWeight = 'bold';
+        totalLi.innerHTML = `<h3>TOTAL DE PAN A PREPARAR: ${totalPan} unidades</h3>`;
+        repartoList.prepend(totalLi);
+
+    } catch (error) {
+        repartoList.innerHTML = '<li>Error al generar el reparto.</li>';
+        console.error('Error en generarRepartoDesdePlantillas:', error);
+    }
 }
+
+// Función auxiliar para el evento 'onchange' en la lista de reparto (no guarda, solo simula)
+function actualizarPedidoReparto(nuevaCantidad, clienteId) {
+    console.log(`Pedido del cliente ${clienteId} actualizado a ${nuevaCantidad} para el reparto actual. (Este cambio no se guarda en la plantilla)`);
+    // Para que el TOTAL se actualice, se necesitaría re-ejecutar generarRepartoDesdePlantillas()
+}
+
 
 // --- 5. Inicialización (Punto de entrada de la aplicación) ---
 document.addEventListener('DOMContentLoaded', async () => {
-    // A. ASIGNAR VARIABLES DEL DOM (CORRECCIÓN CRÍTICA)
-    // Esto se ejecuta SOLO cuando el HTML está completamente cargado.
+    // A. ASIGNAR VARIABLES DEL DOM (CRÍTICO)
     clienteForm = document.getElementById('cliente-form');
     clientesList = document.getElementById('clientes-list');
     repartoList = document.getElementById('reparto-list');
     saveBtn = document.getElementById('save-btn');
     
-    // B. ASIGNAR EVENT LISTENER (CORRECCIÓN CRÍTICA)
-    // Ahora que clienteForm está definido, podemos asignarle el listener.
+    // B. ASIGNAR EVENT LISTENER (CRÍTICO)
     clienteForm.addEventListener('submit', async function(event) {
         event.preventDefault();
         
@@ -246,16 +304,19 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-
     // C. INICIAR LA BASE DE DATOS Y LA APLICACIÓN
     try {
         await openDB(); // Abrimos la base de datos primero
         renderClientes();
-        // Puedes agregar aquí la lógica para vincular el botón "Generar Reparto"
-        // document.getElementById('generar-reparto-btn').onclick = generarRepartoDesdePlantillas;
+        // Vinculamos el botón de generar reparto (si lo tienes en el HTML)
+        const generarRepartoBtn = document.querySelector('#reparto-section button');
+        if (generarRepartoBtn) {
+            generarRepartoBtn.onclick = generarRepartoDesdePlantillas;
+        }
         generarRepartoDesdePlantillas();
     } catch (error) {
         console.error('La aplicación no pudo iniciar correctamente. Revisar la configuración de IndexedDB.', error);
     }
 });
+
 
