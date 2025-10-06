@@ -1,292 +1,33 @@
-/* Reset básico y estilos generales */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
 }
-
-body, html {
-    height: 100%;
-    font-family: 'Poppins', Arial, sans-serif;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-    background-color: #f0f5f9;
-    color: #333;
+main {
+    max-width: 600px;
+    margin: 0 auto;
 }
-
-/* Hero Section */
-.hero {
-    height: 100vh;
-    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('src/BahiaSamborombonHeader.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: white;
-    position: relative;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-}
-
-.hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 90%;
-    animation: fadeInScale 1.5s ease-out;
-}
-
-.hero h1 {
-    font-size: 3.5rem;
-    margin-bottom: 0.5rem;
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
-    letter-spacing: 2px;
-}
-
-.hero h2 {
-    font-size: 1.8rem;
-    text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
-}
-
-@keyframes fadeInScale {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-/* Barra de navegación */
-.nav-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(8px);
-    transition: background-color 0.4s ease;
-}
-
-.nav-bar.scrolled {
-    background-color: rgba(0, 0, 0, 0.8);
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 2.5rem;
-}
-
-.nav-bar a {
-    text-decoration: none;
-    color: white;
-    font-weight: 500;
-    padding: 0.8rem 1.2rem;
-    border-radius: 8px;
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    position: relative;
-    overflow: hidden;
-}
-
-.nav-bar a:hover {
-    color: #0077cc;
-    background-color: white;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
-}
-
-/* Menú hamburguesa */
-.menu-toggle {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    z-index: 1001;
-    transition: transform 0.3s ease-in-out;
-}
-
-.menu-toggle .bar {
-    width: 28px;
-    height: 3px;
-    background-color: white;
-    margin: 5px 0;
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-/* Estilo general de secciones */
 section {
-    padding: 5rem 2rem;
-    max-width: 1200px;
-    margin: 3rem auto;
-    line-height: 1.8;
-    border-radius: 16px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-    transition: transform 0.5s ease-in-out;
-    animation: fadeInUp 1.2s ease;
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
 }
-
-section:hover {
-    transform: translateY(-8px);
-}
-
-section h2 {
-    text-align: center;
-    margin-bottom: 2.5rem;
-    font-size: 2.5rem;
-    color: #004466;
-    position: relative;
-}
-
-section h2::after {
-    content: '';
+input[type="text"], input[type="number"] {
     display: block;
-    width: 80px;
-    height: 4px;
-    background: #0077cc;
-    margin: 10px auto 0;
-    border-radius: 2px;
+    width: 90%;
+    padding: 8px;
+    margin-bottom: 10px;
 }
-
-/* Colores diferenciados */
-#desc { background-color: #e3f2fd; }
-#fauna { background-color: #f1f8e9; }
-#flora { background-color: #fff8e1; }
-#mapa { background-color: #e8eaf6; }
-
-/* Botones */
-.btn {
-    display: inline-block;
-    padding: 0.8rem 1.6rem;
-    background: #0077cc;
-    color: white;
-    border-radius: 10px;
-    text-decoration: none;
-    transition: all 0.4s ease-in-out;
-    font-weight: bold;
-}
-
-.btn:hover {
-    background: #005fa3;
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-}
-
-/* Carrusel - NUEVOS ESTILOS */
-.carousel {
-    position: relative;
-    overflow: hidden;
-    border-radius: 16px;
-    margin-bottom: 2.5rem;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-}
-
-.carousel-track {
-    display: flex;
-    flex-wrap: nowrap;
-    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.carousel img {
-    min-width: 100%;
-    height: 400px;
-    object-fit: cover;
-    border-radius: 0;
-    box-shadow: none;
-    transition: transform 0.5s ease-in-out;
-}
-
-.carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0,0,0,0.6);
-    color: white;
-    border: none;
-    font-size: 2.5rem;
-    padding: 0.5rem 1rem;
+button {
+    padding: 10px 15px;
+    margin-right: 5px;
     cursor: pointer;
-    border-radius: 50%;
-    z-index: 2;
-    transition: background-color 0.3s ease, transform 0.3s ease;
 }
-
-.carousel-btn:hover {
-    background-color: rgba(0,0,0,0.9);
-    transform: translateY(-50%) scale(1.1);
+#clientes-list, #reparto-list {
+    list-style: none;
+    padding: 0;
 }
-
-.carousel-btn.prev { left: 15px; }
-.carousel-btn.next { right: 15px; }
-
-/* Media Query para móviles */
-@media (max-width: 768px) {
-    /* Menú de navegación */
-    .nav-bar {
-        justify-content: space-between;
-        padding: 1rem 1.5rem;
-    }
-
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        background-color: rgba(0, 0, 0, 0.95);
-        backdrop-filter: blur(12px);
-        padding: 1rem 0;
-    }
-    
-    .nav-links.active {
-        display: flex;
-        align-items: center;
-    }
-
-    .nav-links li {
-        width: 100%;
-        text-align: center;
-        padding: 1rem 0;
-    }
-    
-    .menu-toggle {
-        display: flex;
-    }
-    
-    /* Contenido principal */
-    .hero h1 {
-        font-size: 2.5rem;
-    }
-
-    .hero h2 {
-        font-size: 1.2rem;
-    }
-
-    section {
-        padding: 3rem 1.5rem;
-    }
-
-    section h2 {
-        font-size: 2rem;
-    }
-    
-    /* Carrusel */
-    .carousel-track {
-        flex-direction: row;
-        overflow: hidden;
-    }
-    
-    .carousel img {
-        width: 100%;
-        height: 250px;
-    }
+#clientes-list li, #reparto-list li {
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
 }
-

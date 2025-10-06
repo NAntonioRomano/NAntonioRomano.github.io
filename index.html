@@ -3,338 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bahía de Samborombón - Proyecto Escolar</title>
-    
-    <!-- Tailwind CSS para un diseño moderno y adaptable -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts para una tipografía más amigable -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        /* Agregamos scroll-behavior para que el desplazamiento del menú sea suave */
-        html {
-            scroll-behavior: smooth;
-            /* Agregamos padding-bottom para que el menú fijo no tape el contenido final */
-            padding-bottom: 80px; 
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .hero-gradient {
-            background-image: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1));
-        }
-
-        .scroll-reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .scroll-reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Estilos para el botón activo del menú */
-        .nav-link.active svg {
-            color: #0891b2; /* Un color cian brillante */
-        }
-        .nav-link.active span {
-            color: #0e7490;
-        }
-        
-        /* --- NUEVOS ESTILOS PARA LA GALERÍA EMERGENTE (LIGHTBOX) --- */
-        #lightbox.active {
-            display: flex;
-        }
-    </style>
+    <title>Gestor de Reparto Panadería 🥖</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
 </head>
-<body class="bg-gray-50 text-gray-800">
-
-    <!-- ========== ENCABEZADO Y TÍTULO PRINCIPAL ========== -->
-    <header id="inicio" class="relative h-screen bg-cover bg-center" style="background-image: url('src/BahiaSamborombonHeader.jpg');">
-        <div class="absolute inset-0 bg-black bg-opacity-40"></div>
-        <div class="relative h-full flex flex-col justify-center items-center text-white text-center p-4 hero-gradient">
-            <h1 class="text-4xl md:text-6xl font-bold tracking-tight leading-tight mb-4" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.7);">
-                Bahía de Samborombón
-            </h1>
-            <p class="text-lg md:text-2xl font-light" style="text-shadow: 1px 1px 4px rgba(0,0,0,0.7);">
-                Un tesoro natural de Argentina
-            </p>
-        </div>
+<body>
+    <header>
+        <h1>Gestión de Clientes y Reparto</h1>
     </header>
-
-    <!-- ========== CONTENIDO PRINCIPAL DE LA PÁGINA ========== -->
-    <main class="container mx-auto p-4 md:p-8">
-
-        <!-- ===== SECCIÓN 1: ¿QUÉ ES LA BAHÍA? ===== -->
-        <section id="desc" class="scroll-reveal my-12 md:my-16 pt-16">
-            <h2 class="text-3xl font-bold text-center mb-4 text-cyan-800">¿Qué es la Bahía de Samborombón?</h2>
-            <p class="text-lg text-center text-gray-600 max-w-3xl mx-auto mb-8">
-                Imagina una costa gigante donde el río y el mar se encuentran. Es un lugar lleno de pantanos, pastizales y cangrejales, súper importante para miles de animales, ¡especialmente para las aves que viajan por el mundo!
-            </p>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                 <!-- Tarjetas de datos curiosos... -->
-                 <div class="bg-white p-4 rounded-xl shadow-lg">
-                    <div class="text-cyan-600 mb-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    </div>
-                    <h3 class="font-bold text-lg">Ubicación</h3>
-                    <p class="text-sm text-gray-500">Costa de Buenos Aires</p>
-                </div>
-                <div class="bg-white p-4 rounded-xl shadow-lg">
-                    <div class="text-cyan-600 mb-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                    </div>
-                    <h3 class="font-bold text-lg">Superficie</h3>
-                    <p class="text-sm text-gray-500">404.000 hectáreas</p>
-                </div>
-                <div class="bg-white p-4 rounded-xl shadow-lg">
-                    <div class="text-cyan-600 mb-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                    </div>
-                    <h3 class="font-bold text-lg">Ecosistema</h3>
-                    <p class="text-sm text-gray-500">Humedal costero</p>
-                </div>
-                <div class="bg-white p-4 rounded-xl shadow-lg">
-                    <div class="text-cyan-600 mb-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                    </div>
-                    <h3 class="font-bold text-lg">Hogar de</h3>
-                    <p class="text-sm text-gray-500">+300 especies</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== SECCIÓN 2: FAUNA ===== -->
-        <section id="fauna" class="scroll-reveal my-12 md:my-16 pt-16">
-            <h2 class="text-3xl font-bold text-center mb-8 text-green-800">Animales increíbles</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                    <img src="src/VenadoDeLasPampas.jpg" alt="Venado de las Pampas" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-bold text-xl mb-2">Venado de las Pampas</h3>
-                        <p class="text-gray-600 text-sm">Es uno de los últimos lugares donde vive este ciervo. ¡Está en peligro de extinción y aquí lo cuidan!</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                    <img src="src/Gaviota.jpeg" alt="Gaviota de Olrog" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-bold text-xl mb-2">Gaviota de Olrog</h3>
-                        <p class="text-gray-600 text-sm">Miles de aves migratorias como esta gaviota, que también está en peligro, usan la bahía para descansar.</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                    <img src="src/delfines-de-la-plata.jpg" alt="Delfín Franciscana" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-bold text-xl mb-2">Delfín Franciscana</h3>
-                        <p class="text-gray-600 text-sm">Es uno de los delfines más pequeños y raros del mundo. Le encantan las aguas tranquilas de la bahía.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== SECCIÓN 3: FLORA ===== -->
-        <section id="flora" class="scroll-reveal my-12 md:my-16 pt-16">
-            <h2 class="text-3xl font-bold text-center mb-8 text-yellow-800">Plantas que la hacen especial</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col sm:flex-row items-center">
-                    <img src="src/Pastizal.jpg" alt="Pastizales" class="w-full sm:w-1/3 h-48 sm:h-full object-cover">
-                    <div class="p-4">
-                        <h3 class="font-bold text-xl mb-2">Pastizales y Espartillares</h3>
-                        <p class="text-gray-600 text-sm">Son como "praderas" de pasto que se adaptan al agua salada. Son el hogar y la comida de muchos animales.</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col sm:flex-row items-center">
-                    <img src="src/Juncales.jpg" alt="Juncales" class="w-full sm:w-1/3 h-48 sm:h-full object-cover">
-                    <div class="p-4">
-                        <h3 class="font-bold text-xl mb-2">Juncales</h3>
-                        <p class="text-gray-600 text-sm">Estos juncos altos crecen en las zonas más inundadas y ayudan a limpiar el agua, ¡como un filtro natural!</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== SECCIÓN 4: MAPA ===== -->
-        <section id="mapa" class="scroll-reveal my-12 md:my-16 pt-16">
-            <h2 class="text-3xl font-bold text-center mb-8 text-blue-800">¿Dónde está este paraíso?</h2>
-            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-6">
-                La bahía forma una gran curva en la costa de la provincia de Buenos Aires. Es tan grande que se puede ver desde el espacio.
-            </p>
-            <div class="rounded-xl shadow-lg overflow-hidden">
-                <img src="src/Mapa1.jpg" alt="Mapa de la Bahía de Samborombón" class="w-full h-auto object-contain">
-            </div>
-        </section>
-
-        <!-- ===== NUEVA SECCIÓN 5: EQUIPO ===== -->
-        <section id="equipo" class="scroll-reveal my-12 md:my-16 pt-16">
-            <h2 class="text-3xl font-bold text-center mb-8 text-purple-800">¡Nuestro Equipo en Acción!</h2>
-            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-6">
-                Así trabajamos para aprender sobre este increíble lugar. ¡Fue muy divertido preparar todo para la exposición!
-            </p>
-            <div id="team-gallery" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                <img src="src/Foto1.jpg" alt="Foto del equipo trabajando 1" class="gallery-item rounded-lg shadow-md aspect-square object-cover object-top cursor-pointer hover:opacity-80 transition-opacity">
-                <img src="src/Foto2.jpg" alt="Foto del equipo trabajando 2" class="gallery-item rounded-lg shadow-md aspect-square object-cover object-top cursor-pointer hover:opacity-80 transition-opacity">
-                <img src="src/Foto3.jpg" alt="Foto del equipo trabajando 3" class="gallery-item rounded-lg shadow-md aspect-square object-cover object-top cursor-pointer hover:opacity-80 transition-opacity">
-                <img src="src/Foto4.jpg" alt="Foto del equipo trabajando 4" class="gallery-item rounded-lg shadow-md aspect-square object-cover object-top cursor-pointer hover:opacity-80 transition-opacity">
-                <img src="src/Foto5.jpg" alt="Foto del equipo trabajando 5" class="gallery-item rounded-lg shadow-md aspect-square object-cover object-top cursor-pointer hover:opacity-80 transition-opacity">
-                <img src="src/Foto6.jpg" alt="Foto del equipo trabajando 6" class="gallery-item rounded-lg shadow-md aspect-square object-cover object-top cursor-pointer hover:opacity-80 transition-opacity">
-                <img src="src/Foto7.jpg" alt="Foto del equipo trabajando 7" class="gallery-item rounded-lg shadow-md aspect-square object-cover object-top cursor-pointer hover:opacity-80 transition-opacity">
-            </div>
-        </section>
     
+    <main>
+        <section id="cliente-form-section">
+            <h2>Registro de Clientes</h2>
+            <form id="cliente-form">
+                <input type="hidden" id="cliente-id">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" required>
+                
+                <label for="direccion">Dirección:</label>
+                <input type="text" id="direccion" required>
+                
+                <label for="celular">Celular:</label>
+                <input type="text" id="celular">
+                
+                <label for="saldo">Saldo en contra:</label>
+                <input type="number" id="saldo" value="0" step="0.01">
+                
+                <button type="submit" id="save-btn">Guardar Cliente</button>
+            </form>
+        </section>
+
+        <section id="clientes-list-section">
+            <h2>Clientes Registrados</h2>
+            <ul id="clientes-list">
+                </ul>
+        </section>
+        
+        <section id="reparto-section">
+            <h2>Reparto del Día</h2>
+            <button onclick="generarRepartoDesdePlantillas()">Generar Reparto (Plantillas)</button>
+            <ul id="reparto-list">
+                </ul>
+        </section>
     </main>
-
-    <!-- ========== PIE DE PÁGINA ========== -->
-    <footer class="bg-gray-800 text-white text-center p-6 mt-12">
-        <p>Proyecto escolar sobre la Bahía de Samborombón.</p>
-        <p class="text-sm text-gray-400 mt-2">Información adaptada de AMP Argentina y organismos de conservación.</p>
-    </footer>
-
-    <!-- ========== NUEVO MENÚ DE NAVEGACIÓN FIJO ========== -->
-    <nav class="fixed bottom-0 left-0 right-0 bg-white shadow-t-lg border-t border-gray-200 z-50">
-        <div class="flex justify-around max-w-xl mx-auto">
-            <a href="#desc" class="nav-link flex-1 text-center py-2 px-1 text-gray-500 hover:text-cyan-600 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" /></svg>
-                <span class="text-xs">Info</span>
-            </a>
-            <a href="#fauna" class="nav-link flex-1 text-center py-2 px-1 text-gray-500 hover:text-cyan-600 transition-colors">
-                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.538 15.016L12 17.554l-2.538-2.538a4 4 0 115.076 0zM5.462 9.016L8 11.554l2.538-2.538a4 4 0 10-5.076 0z" /></svg>
-                <span class="text-xs">Fauna</span>
-            </a>
-            <a href="#flora" class="nav-link flex-1 text-center py-2 px-1 text-gray-500 hover:text-cyan-600 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" /></svg>
-                <span class="text-xs">Flora</span>
-            </a>
-            <a href="#mapa" class="nav-link flex-1 text-center py-2 px-1 text-gray-500 hover:text-cyan-600 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l5.447 2.724A1 1 0 0021 16.382V5.618a1 1 0 00-1.447-.894L15 7m-6 3l6-3" /></svg>
-                <span class="text-xs">Mapa</span>
-            </a>
-            <a href="#equipo" class="nav-link flex-1 text-center py-2 px-1 text-gray-500 hover:text-cyan-600 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283-.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
-                <span class="text-xs">Equipo</span>
-            </a>
-        </div>
-    </nav>
     
-    <!-- ========== NUEVA GALERÍA EMERGENTE (LIGHTBOX) ========== -->
-    <div id="lightbox" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-80 justify-center items-center z-50 hidden">
-        <img id="lightbox-img" src="" alt="Foto del equipo en grande" class="max-w-[90%] max-h-[80%] object-contain">
-        <button id="lightbox-close" class="absolute top-4 right-4 text-white text-3xl">&times;</button>
-        <button id="lightbox-prev" class="absolute left-4 top-1/2 -translate-y-1/2 text-white text-4xl bg-black bg-opacity-50 rounded-full p-2">&#10094;</button>
-        <button id="lightbox-next" class="absolute right-4 top-1/2 -translate-y-1/2 text-white text-4xl bg-black bg-opacity-50 rounded-full p-2">&#10095;</button>
-    </div>
-
-
-    <script>
-        // --- SCRIPT PARA ANIMAR SECCIONES AL HACER SCROLL ---
-        const revealElements = document.querySelectorAll('.scroll-reveal');
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        revealElements.forEach(el => {
-            revealObserver.observe(el);
-        });
-
-        // --- SCRIPT PARA MARCAR EL BOTÓN ACTIVO EN EL MENÚ ---
-        const sections = document.querySelectorAll('section, header');
-        const navLinks = document.querySelectorAll('.nav-link');
-        
-        const observerOptions = {
-            root: null, // el viewport
-            rootMargin: '0px',
-            threshold: 0.4 // se activa cuando el 40% de la sección está visible
-        };
-
-        const sectionObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const id = entry.target.getAttribute('id');
-                    // Mapeo para que el header active el primer botón de "Info"
-                    const activeId = id === 'inicio' ? 'desc' : id; 
-                    
-                    navLinks.forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === `#${activeId}`) {
-                            link.classList.add('active');
-                        }
-                    });
-                }
-            });
-        }, observerOptions);
-
-        sections.forEach(section => {
-            sectionObserver.observe(section);
-        });
-
-        // --- NUEVO SCRIPT PARA LA GALERÍA EMERGENTE (LIGHTBOX) ---
-        const galleryItems = document.querySelectorAll('.gallery-item');
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        const lightboxClose = document.getElementById('lightbox-close');
-        const lightboxPrev = document.getElementById('lightbox-prev');
-        const lightboxNext = document.getElementById('lightbox-next');
-
-        let currentIndex = 0;
-        const images = Array.from(galleryItems).map(item => item.src);
-
-        function showImage(index) {
-            lightboxImg.src = images[index];
-            currentIndex = index;
-            lightbox.classList.remove('hidden');
-            lightbox.classList.add('flex'); // Usamos flex para centrar
-        }
-
-        galleryItems.forEach((item, index) => {
-            item.addEventListener('click', () => {
-                showImage(index);
-            });
-        });
-
-        lightboxClose.addEventListener('click', () => {
-            lightbox.classList.add('hidden');
-            lightbox.classList.remove('flex');
-        });
-
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
-                 lightbox.classList.add('hidden');
-                 lightbox.classList.remove('flex');
-            }
-        });
-
-        lightboxNext.addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) % images.length;
-            showImage(currentIndex);
-        });
-
-        lightboxPrev.addEventListener('click', () => {
-            currentIndex = (currentIndex - 1 + images.length) % images.length;
-            showImage(currentIndex);
-        });
-        
-        // Navegación con teclado
-        document.addEventListener('keydown', (e) => {
-            if (!lightbox.classList.contains('hidden')) {
-                if (e.key === 'ArrowRight') {
-                    lightboxNext.click();
-                } else if (e.key === 'ArrowLeft') {
-                    lightboxPrev.click();
-                } else if (e.key === 'Escape') {
-                    lightboxClose.click();
-                }
-            }
-        });
-
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>
